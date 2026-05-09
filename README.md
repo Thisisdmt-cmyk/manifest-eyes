@@ -67,7 +67,7 @@ Patterns crystallised across the author's substrate work for independent practic
 
 ## Where to find the author
 
-David Mantalios-Thompson is an independent senior planner and AI-native delivery lead based in Jarrow, UK. Engagement shapes (Discovery Sprint / Programme Reset / Composite delivery / Fractional CTO / AI Implementation Lead) at his website (link forthcoming once domain pair lands).
+David Mantalios-Thompson is an independent senior planner and AI-native delivery lead based in Newcastle Upon Tyne, UK. Engagement shapes (Discovery Sprint / Programme Reset / Composite delivery / Fractional CTO / AI Implementation Lead) at his website (link forthcoming once domain pair lands).
 
 LinkedIn: linkedin.com/in/david-mantalios-thompson-8884091b4
 Email: Thisisdmt@gmail.com

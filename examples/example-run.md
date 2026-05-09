@@ -61,7 +61,7 @@ Sonnet renders the final markdown for publication: header block, body, "Where th
 
 Mechanical checks:
 - ASCII-clean (no em / en dashes): pass
-- IP-protection grep (TCOM / TSOM / QEREN / Permanence / Crystal Store / Dream Cycle / APEX rubric internals): pass
+- IP-protection grep (operator-internal closed-substrate name list): pass
 - Floor stamp present in artefact metadata: pass
 - Word count within 1,500 to 2,000: pass (1,820 words)
 - All cited references verifiable: pass

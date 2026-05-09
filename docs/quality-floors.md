@@ -14,8 +14,8 @@ named pattern I use in AI-native delivery: the four-floor quality-numbers model.
 public-eligible. The rubric internals - the lens-by-lens scoring logic that sits behind each floor
 - are not. A buyer can adopt the floor pattern with no dependency on my rubric internals.
 
-The worked example underpinning this essay is the 50-day platform build documented in
-`case-study-50-day-platform-build.md`. The four floors appear in that case study as named
+The worked example underpinning this essay is the platform substrate build referenced in
+an operator-internal worked example. The four floors appear in that case study as named
 constants in the substrate code. This document explains what they measure, why they are floors
 (not targets), and how they travel to a buyer engagement.
 
@@ -258,7 +258,7 @@ work.html. Practice No. 02 (plans at AI-native pace) depends on the quality argu
 faster slop; it is a plan with the dependency-ordering, evidence-linking, and senior-judgement an
 executive sponsor can take to a board." The four floors are the named mechanism behind that claim.
 
-**CV**: The four-floor numbers appear in the 50-day platform build case study as the quality
+**CV**: The four-floor numbers appear in an operator-internal worked example as the quality
 anchor. Buyers who want to understand what those numbers mean in practice get directed to this
 essay.
 

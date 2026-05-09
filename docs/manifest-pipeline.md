@@ -14,8 +14,8 @@ named pattern I use in AI-native delivery: the manifest pipeline. The pattern is
 The substrate I built it on is not. A buyer can adopt the pattern with no dependency on my
 substrate.
 
-The worked example underpinning this essay is the 50-day platform build documented in
-`case-study-50-day-platform-build.md`. Where I reference the build, the case study has the full
+The worked example underpinning this essay is the platform substrate build referenced in
+an operator-internal worked example. Where I reference the build, the case study has the full
 narrative; this document has the pattern mechanics.
 
 ---
@@ -247,7 +247,7 @@ work.html. It is the structural answer to "how do you prevent AI-native delivery
 fast slop with no governance?" The pipeline is the governance.
 
 **CV**: The manifest pipeline pattern is the named methodology behind the "stage-gated delivery"
-reference in the 50-day platform build case study. Buyers who want to understand the governance
+reference in an operator-internal worked example. Buyers who want to understand the governance
 model behind the AI-native delivery practice get directed here.
 
 **Sales kit**: In a Discovery Sprint engagement, the Sprint itself is structured as a manifest: a
@@ -289,7 +289,7 @@ produced? The manifest pipeline makes that answer concrete and specific.
 ## Self-grade (APEX-Enhanced floors)
 
 - **TRUTH 100**: Stage names, stage sequence, and stage descriptions are accurately stated and
-  consistent with the pattern as deployed in the 50-day build case study. Operator-override
+  consistent with the pattern as deployed in an operator-internal worked example. Operator-override
   behaviour accurately described (explicit, logged, rate-limited). No substrate names asserted.
   Behavioural claims hedged where appropriate.
 - **USER 95**: Written for a technically-literate buyer or senior practitioner who wants to

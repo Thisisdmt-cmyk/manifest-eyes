@@ -13,7 +13,7 @@ Thank you for the interest. This is a methodology-pattern repository, not a code
 ## What contributions are not in scope
 
 - Changes that fold the patterns back to a single-assessor or single-jurisdiction model. The whole point is the diversity of three.
-- Changes that add specific commercial substrate (TCOM / TSOM / QEREN / Permanence / closed-source rubric internals). The patterns are public-eligible by design; the substrate that produced them is not.
+- Changes that add specific commercial substrate (operator-internal closed-substrate name list). The patterns are public-eligible by design; the substrate that produced them is not.
 - Provider lock-in. The schemas should remain provider-substitutable.
 - Non-Apache-2.0-compatible licensing on derivative work in this repository.
 

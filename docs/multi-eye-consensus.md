@@ -14,8 +14,8 @@ named pattern I use in AI-native delivery: the Multi-Eye Consensus model. The pa
 public-eligible. The substrate I built it on is not. A buyer can adopt the pattern with no
 dependency on my substrate.
 
-The worked example underpinning this essay is the 50-day platform build documented in
-`case-study-50-day-platform-build.md`. Where I reference the build, the case study has the full
+The worked example underpinning this essay is the platform substrate build referenced in
+an operator-internal worked example. Where I reference the build, the case study has the full
 narrative; this document has the pattern mechanics.
 
 ---
@@ -237,7 +237,7 @@ Practice No. 02 (plans at AI-native pace).
 **CV**: The Multi-Eye Consensus pattern is the named methodology behind the AI-native delivery
 practice. Buyers who ask "how do you maintain quality at AI-native pace?" get directed here.
 
-**Sales kit**: This essay pairs with `case-study-50-day-platform-build.md`. The case study is the
+**Sales kit**: This essay pairs with an operator-internal worked example. The case study is the
 velocity proof; this essay is the quality-discipline proof. Buyers asking "but does AI actually
 hold quality?" get this essay.
 

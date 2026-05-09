@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "comment": "Example assessor configuration. Three independent diverse-jurisdiction providers, each accessed via a documented HTTP API. Replace the example provider names + model identifiers with your own substrate-substitutable choices. The pattern requires three; the names are not load-bearing.",
+  "version": "0.1",
+  "consensus": {
+    "default_floor": "2-of-3",
+    "two-dissent-action": "escalate-to-human",
+    "tie-break-policy": "human-only"
+  },
+  "assessors": [
+    {
+      "id": "assessor-1",
+      "provider": "Mistral",
+      "model": "mistral-large-latest",
+      "jurisdiction": "EU / France",
+      "api_env_var": "MISTRAL_API_KEY",
+      "rationale": "European substrate; commercial-API access; strong on European-languages and regulatory-style assessment."
+    },
+    {
+      "id": "assessor-2",
+      "provider": "Cohere",
+      "model": "command-a-03-2025",
+      "jurisdiction": "Canada",
+      "api_env_var": "COHERE_API_KEY",
+      "rationale": "Canadian substrate; enterprise-retrieval-strong; calibration-stable across long evaluation windows."
+    },
+    {
+      "id": "assessor-3",
+      "provider": "HuggingFace / Novita",
+      "model": "deepseek-ai/DeepSeek-R1:novita",
+      "jurisdiction": "Western infrastructure (open-weights)",
+      "api_env_var": "HF_API_KEY",
+      "rationale": "Open-weights model on Western inference infra; auditable weights; substrate-diverse from the two commercial APIs."
+    }
+  ],
+  "rotation_rule": {
+    "comment": "If one assessor is also asked to shape the prompt or generate the output, that assessor is excluded from the assessment. Assessment then runs 2-of-2 on the remaining; an operator-review flag is raised at certification.",
+    "shaping-excludes-assessment": true
+  },
+  "blocked_providers": {
+    "comment": "Providers explicitly excluded from the quality pipeline. The exclusion reasons are operator-set; substitutable per organisation policy.",
+    "us_quality_pipeline_exclusion": ["OpenAI", "Google Gemini", "Together.ai"],
+    "chinese_api_endpoint_ban": ["DeepSeek API direct", "Qwen API direct"],
+    "rationale": "Operator-set jurisdictional posture: no US providers in quality pipeline; Chinese open-weights permitted on Western infra only."
+  }
+}

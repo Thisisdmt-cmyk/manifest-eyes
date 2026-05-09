@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Thisisdmt-cmyk/manifest-eyes/schemas/manifest.schema.json",
+  "title": "manifest-eyes / Manifest",
+  "description": "A manifest declares the dependency-ordered packets that compose a single piece of AI-native delivery work. Each packet is claimed exactly once, executed by a named model tier, and completed with a result reference. Stages run in order; orphan artefacts cannot be certified.",
+  "type": "object",
+  "required": ["manifest_id", "product_type", "brief", "stages", "depth", "created_at"],
+  "additionalProperties": false,
+  "properties": {
+    "manifest_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+      "description": "Stable slug for this manifest, used as the directory name and the claim-ledger key."
+    },
+    "product_type": {
+      "type": "string",
+      "description": "What the manifest produces: e.g. 'methodology-essay', 'funding-plan-section', 'cv-pack', 'one-pager', 'plan-uplift', 'eyes-evaluation'."
+    },
+    "brief": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The originating operator brief that sourced this manifest. Verbatim where possible."
+    },
+    "depth": {
+      "type": "string",
+      "enum": ["smoke", "standard", "full", "deep"],
+      "description": "Determines how many stages run and how strict the assessor consensus requirement is. 'smoke' skips eval; 'deep' runs eval+refine+verify with hard 2-of-3 floor."
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/Packet" },
+      "description": "Ordered list of packets. Position in array is dependency order; a packet may not be claimed before all earlier packets are complete."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "operator": {
+      "type": "string",
+      "description": "The human ultimately accountable for the manifest. Distinct from the model tier executing each packet."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-form tags for retrieval. Convention: client-slug, brand-namespace, recognition-track, etc."
+    }
+  },
+  "$defs": {
+    "Packet": {
+      "type": "object",
+      "required": ["packet_id", "stage", "model_tier", "depends_on"],
+      "additionalProperties": false,
+      "properties": {
+        "packet_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+        },
+        "stage": {
+          "type": "string",
+          "enum": ["research", "generate", "evaluate", "refine", "build", "verify", "certify"],
+          "description": "Pipeline stage. Stages must execute in this order. 'evaluate' is the eyes-consensus stage and requires model_tier=external-diverse."
+        },
+        "model_tier": {
+          "type": "string",
+          "enum": ["sonnet", "opus", "haiku", "external-diverse", "mechanical"],
+          "description": "Which tier of model executes this packet. 'external-diverse' means three independent assessor providers (see eyes-config.example.json)."
+        },
+        "depends_on": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Packet IDs that must be in 'complete' status before this packet may be claimed."
+        },
+        "expected_output_type": {
+          "type": "string",
+          "enum": ["markdown", "html", "json", "schema", "text", "image", "diagram"],
+          "description": "What the result reference must be. manifest-complete validates the result type matches; mismatch is rejected."
+        },
+        "consensus_floor": {
+          "type": "string",
+          "enum": ["3-of-3", "2-of-3", "advisory"],
+          "default": "2-of-3",
+          "description": "Required consensus on assessor stages. Two dissents block under '2-of-3'; one dissent blocks under '3-of-3'; 'advisory' records dissents without blocking."
+        },
+        "claimed_at": { "type": ["string", "null"], "format": "date-time" },
+        "completed_at": { "type": ["string", "null"], "format": "date-time" },
+        "result_ref": {
+          "type": ["string", "null"],
+          "description": "Path or URI to the artefact produced by this packet. Required to mark complete."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["claimable", "claimed", "complete", "failed", "blocked"],
+          "default": "claimable"
+        }
+      }
+    }
+  }
+}

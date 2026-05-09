@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Thisisdmt-cmyk/manifest-eyes/schemas/claim.schema.json",
+  "title": "manifest-eyes / Claim",
+  "description": "A claim is a write-once ledger entry asserting that a named manifest packet was executed and produced a named output. The ledger is append-only; corrections supersede prior entries by reference, never by overwrite.",
+  "type": "object",
+  "required": ["claim_id", "manifest_id", "packet_id", "claimant", "claimed_at", "kind"],
+  "additionalProperties": false,
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "v4 UUID. The claim is identified by this UUID for the lifetime of the ledger."
+    },
+    "manifest_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+    },
+    "packet_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+    },
+    "claimant": {
+      "type": "string",
+      "description": "Who or what executed the packet. Convention: '<model-name>:<role>' for model tiers (e.g. 'sonnet:generator', 'mistral-large:assessor-1') or 'human:<name>' for operator-executed packets."
+    },
+    "claimed_at": { "type": "string", "format": "date-time" },
+    "completed_at": { "type": ["string", "null"], "format": "date-time" },
+    "kind": {
+      "type": "string",
+      "enum": ["claim", "complete", "fail", "supersede", "verify"],
+      "description": "What kind of ledger entry this is. 'supersede' references a prior claim by claim_id and replaces it; the prior claim is retained for audit, marked superseded."
+    },
+    "result_ref": {
+      "type": ["string", "null"],
+      "description": "Path / URI to the artefact produced. Required when kind='complete'."
+    },
+    "result_hash": {
+      "type": ["string", "null"],
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "SHA-256 of the artefact bytes. Optional but recommended for any artefact that might be edited in place after the claim lands."
+    },
+    "supersedes": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "claim_id of the prior claim this entry supersedes. Required when kind='supersede'."
+    },
+    "consensus": {
+      "type": ["object", "null"],
+      "description": "Required when packet stage='evaluate' and kind='complete'. Captures the three-assessor outcome.",
+      "required": ["assessors", "outcome"],
+      "additionalProperties": false,
+      "properties": {
+        "assessors": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["name", "verdict"],
+            "properties": {
+              "name": { "type": "string" },
+              "verdict": { "type": "string", "enum": ["pass", "fail", "review"] },
+              "score": { "type": "object", "description": "Optional per-floor score map (TRUTH/USER/FORM/RESONANCE)." },
+              "rationale": { "type": "string" }
+            }
+          }
+        },
+        "outcome": { "type": "string", "enum": ["3-of-3-pass", "2-of-3-pass", "1-of-3-pass", "no-pass", "two-dissent-escalate"] }
+      }
+    },
+    "directive_001_floor": {
+      "type": ["object", "null"],
+      "description": "Self-grade against the four-floor numbers. TRUTH must be 100; the others are reported as integers 0-100 with floor markers. Output that does not meet floors cannot be 'complete'.",
+      "required": ["truth", "user", "form", "resonance"],
+      "properties": {
+        "truth":     { "type": "integer", "minimum": 0, "maximum": 100 },
+        "user":      { "type": "integer", "minimum": 0, "maximum": 100 },
+        "form":      { "type": "integer", "minimum": 0, "maximum": 100 },
+        "resonance": { "type": "integer", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "operator_override": {
+      "type": ["string", "null"],
+      "description": "If the claim was completed under operator override (skipping a stage), the verbatim justification is recorded here. The AI never writes this field."
+    }
+  }
+}

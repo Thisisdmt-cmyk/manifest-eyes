@@ -1,0 +1,31 @@
+# manifest-eyes / .gitignore
+# Tracked: schemas, docs, examples, README, LICENSE.
+# Untracked: any local execution artefacts, secrets, or per-organisation overrides.
+
+# Secrets (never tracked)
+.env
+.env.*
+*.key
+*.pem
+secrets/
+
+# Per-organisation overrides
+eyes-config.local.json
+*.local.*
+
+# Local execution artefacts
+.state/
+.claims-ledger/
+.runs/
+output/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+node_modules/
+dist/
+build/

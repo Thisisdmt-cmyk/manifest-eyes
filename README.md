@@ -63,7 +63,7 @@ The author retains the substrate. The author publishes the floor.
 
 ## Citations + provenance
 
-Patterns crystallised across approximately 50 calendar days of substrate development by the author (independent practice, post-DXC tenure 2026). Some shapes echo prior work in software supply-chain attestation (in-toto), reproducible builds (Debian/Reproducible Builds project), and multi-rater calibration (inter-annotator agreement statistics). These are PATTERN-level echoes, not borrowings.
+Patterns crystallised across the author's substrate work for independent practice. Some shapes echo prior work in software supply-chain attestation (in-toto), reproducible builds (Debian / Reproducible Builds project), and multi-rater calibration (inter-annotator agreement statistics). These are PATTERN-level echoes, not borrowings.
 
 ## Where to find the author
 
